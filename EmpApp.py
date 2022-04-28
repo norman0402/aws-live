@@ -23,8 +23,23 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AddEmp.html')
-
+    return render_template('index.html')
+	
+@app.route("/", methods=['GET', 'POST'])
+def attendance():
+    return render_template('attendance.html')
+	
+@app.route("/", methods=['GET', 'POST'])
+def benefits():
+    return render_template('benefits.html')
+	
+@app.route("/", methods=['GET', 'POST'])
+def payroll():
+    return render_template('payroll.html')
+	
+@app.route("/", methods=['GET', 'POST'])
+def staff_details():
+    return render_template('staff_details.html')
 
 @app.route("/about", methods=['POST'])
 def about():
