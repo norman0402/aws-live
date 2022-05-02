@@ -143,8 +143,7 @@ def AddEmp():
 
         changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
 	cursor.execute(update_sql, (changefield))
-		
-        emp_name = "" + first_name + " " + last_name
+	emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
