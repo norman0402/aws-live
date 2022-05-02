@@ -21,31 +21,47 @@ output = {}
 table = 'employee'
 
 
+#main index
 @app.route('/')
 def home():
     return render_template('index.html')
 	
-@app.route("/", methods=['GET', 'POST'])
+#attendance page
+@app.route("/attendance", methods=['GET', 'POST'])
 def attendance():
     return render_template('attendance.html')
-	
-@app.route("/", methods=['GET', 'POST'])
+
+#add new employee page
+@app.route("/addnewemp", methods=['GET', 'POST'])
+def addEmployee():
+    return render_template('AddEmp.html')
+
+#get employee page
+@app.route("/getempdata", methods=['GET', 'POST'])
+def addEmployee():
+    return render_template('GetEmp.html')
+
+#benefit page
+@app.route("/benefits", methods=['GET', 'POST'])
 def benefits():
     return render_template('benefits.html')
 	
-@app.route("/", methods=['GET', 'POST'])
+#payroll page
+@app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
     return render_template('payroll.html')
-	
-@app.route("/", methods=['GET', 'POST'])
+
+#staff details page
+@app.route("/staffDet", methods=['GET', 'POST'])
 def staff_details():
     return render_template('staff_details.html')
 
+#about page
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
 
-
+#add employee
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
@@ -94,6 +110,81 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
+
+#edit employee, but currently no edit employee page? also not done
+@app.route("/editemp", methods=['GET','POST'])
+def AddEmp():
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    emp_image_file = request.files['emp_image_file']
+
+    update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s""
+    cursor = db_conn.cursor()
+
+    if emp_image_file.filename == "":
+        return "Please select a file"
+
+    try:
+
+        changefield = (first_name, last_name, pri_skill,location, emp_id)
+		cursor.execute(update_sql, (changefield))
+		
+        emp_name = "" + first_name + " " + last_name
+        # Uplaod image file in S3 #
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        s3 = boto3.resource('s3')
+
+        try:
+            print("Data inserted in MySQL RDS... uploading image to S3...")
+            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
+
+        except Exception as e:
+            return str(e)
+
+    finally:
+        cursor.close()
+
+    print("all modification done...")
+    return render_template('EditEmpOutput.html', name=emp_name)
+	
+#delete employee
+@app.route("/delemp", methods=['GET','POST'])
+def DeleteEmp():
+    emp_id = request.form['emp_id']
+    mycursor = db_conn.cursor()
+    del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
+    mycursor.execute(del_emp_sql, (emp_id))
+    db_conn.commit()
+
+    return render_template('DelEmpOut.html', emp_id=emp_id)
+	
+#get employee
+@app.route("/getemp", methods=['GET','POST'])
+def GetEmpData():
+    emp_id = request.form['emp_id']
+    mycursor = db_conn.cursor()
+    getempdata = "select * from employee WHERE emp_id = %s"
+    mycursor.execute(getempdata,(emp_id))
+    result = mycursor.fetchall()
+    (emp_id, first_name, last_name, pri_skill, location) = result[0]   
+    image_url = showimage(bucket)
+
+    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,image_url=image_url)
 
 
 if __name__ == '__main__':
