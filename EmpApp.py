@@ -38,7 +38,7 @@ def addEmployee():
 
 #get employee page
 @app.route("/getempdata", methods=['GET', 'POST'])
-def addEmployee():
+def getEmployee():
     return render_template('GetEmp.html')
 
 #benefit page
