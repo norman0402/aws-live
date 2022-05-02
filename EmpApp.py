@@ -198,6 +198,7 @@ def GetEmpData():
 
     return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
+#add attendance
 @app.route("/empattendance", methods=['POST'])
 def EmpAttandance():
    
@@ -221,7 +222,7 @@ def EmpAttandance():
 
     return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
 
-#get employee
+#get payroll
 @app.route("/getpay", methods=['GET','POST'])
 def GetPayroll():
     emp_id = request.form['emp_id']
