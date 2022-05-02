@@ -25,7 +25,7 @@ table = 'employee'
 @app.route('/')
 def home():
     return render_template('index.html')
-	
+    
 #attendance page
 @app.route("/attendance", methods=['GET', 'POST'])
 def attendance():
@@ -45,7 +45,7 @@ def addEmployee():
 @app.route("/benefits", methods=['GET', 'POST'])
 def benefits():
     return render_template('benefits.html')
-	
+    
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
@@ -140,13 +140,13 @@ def AddEmp():
         return "Please select a file"
 
     try:
-	changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
-	cursor.execute(update_sql, (changefield))
-	
-	emp_name = "" + first_name + " " + last_name
-	# Upload image file in S3 #
-	emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-	s3 = boto3.resource('s3')
+    changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
+    cursor.execute(update_sql, (changefield))
+    
+    emp_name = "" + first_name + " " + last_name
+    # Upload image file in S3 #
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+    s3 = boto3.resource('s3')
 
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
@@ -172,7 +172,7 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('EditEmpOutput.html', name=emp_name)
-	
+    
 #delete employee
 @app.route("/delemp", methods=['GET','POST'])
 def DeleteEmp():
@@ -183,7 +183,7 @@ def DeleteEmp():
     db_conn.commit()
 
     return render_template('DelEmpOut.html', emp_id=emp_id)
-	
+    
 #get employee
 @app.route("/getemp", methods=['GET','POST'])
 def GetEmpData():
