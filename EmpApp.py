@@ -41,7 +41,6 @@ def addEmployee():
 def addEmployee():
     return render_template('GetEmp.html')
 
-
 #benefit page
 @app.route("/benefits", methods=['GET', 'POST'])
 def benefits():
@@ -130,7 +129,7 @@ def AddEmp():
 
     try:
 
-        changefield = (first_name, last_name, contact_no, email, position, hiredate, salary, emp_id)
+        changefield = (first_name, last_name, pri_skill,location, emp_id)
 		cursor.execute(update_sql, (changefield))
 		
         emp_name = "" + first_name + " " + last_name
