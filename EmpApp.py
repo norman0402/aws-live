@@ -25,7 +25,7 @@ table = 'employee'
 @app.route('/')
 def home():
     return render_template('index.html')
-	
+    
 #attendance page
 @app.route("/attendance", methods=['GET', 'POST'])
 def attendance():
@@ -38,14 +38,14 @@ def addEmployee():
 
 #get employee page
 @app.route("/getempdata", methods=['GET', 'POST'])
-def addEmployee():
+def getEmployee():
     return render_template('GetEmp.html')
 
 #benefit page
 @app.route("/benefits", methods=['GET', 'POST'])
 def benefits():
     return render_template('benefits.html')
-	
+    
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
@@ -119,7 +119,7 @@ def AddEmp():
 
 #edit employee, but currently no edit employee page? also not done
 @app.route("/editemp", methods=['GET','POST'])
-def AddEmp():
+def EditEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -140,12 +140,12 @@ def AddEmp():
         return "Please select a file"
 
     try:
-	
-	changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
-	cursor.execute(update_sql, (changefield))
-	
-	emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
+        
+        changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
+        cursor.execute(update_sql, (changefield))
+    
+        emp_name = "" + first_name + " " + last_name
+        # Upload image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
 
@@ -173,7 +173,7 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('EditEmpOutput.html', name=emp_name)
-	
+    
 #delete employee
 @app.route("/delemp", methods=['GET','POST'])
 def DeleteEmp():
@@ -184,7 +184,7 @@ def DeleteEmp():
     db_conn.commit()
 
     return render_template('DelEmpOut.html', emp_id=emp_id)
-	
+    
 #get employee
 @app.route("/getemp", methods=['GET','POST'])
 def GetEmpData():
