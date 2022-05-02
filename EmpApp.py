@@ -198,6 +198,28 @@ def GetEmpData():
 
     return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
+@app.route("/empattendance", methods=['POST'])
+def EmpAttandance():
+   
+    emp_id = request.form['emp_id']
+    date = request.form['date']
+    time = request.form['time']
+
+    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s)"
+    cursor = db_conn.cursor()
+    
+    try:
+        cursor.execute(insert_sql, (emp_id, date, time))
+        db_conn.commit()
+        status = "Employee " + emp_id + " has checked in at " + date +", " + time 
+
+    except Exception as e:
+            return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
