@@ -68,10 +68,16 @@ def AddEmp():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
+    email = request.form['email']
+    position = request.form['position']
+    hire_date = request.form['hire_date']
+    salary = request.form['salary']
+    benefit = request.form['benefit']
     location = request.form['location']
+    phone_num = request.form['phone_num']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -79,7 +85,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -118,10 +124,16 @@ def AddEmp():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
+    email = request.form['email']
+    position = request.form['position']
+    hire_date = request.form['hire_date']
+    salary = request.form['salary']
+    benefit = request.form['benefit']
     location = request.form['location']
+    phone_num = request.form['phone_num']
     emp_image_file = request.files['emp_image_file']
 
-    update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s""
+    update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, email = %s, phone_num = %s, position = %s, hire_date = %s, salary = %s, benefit = %s WHERE emp_id = %s"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -129,8 +141,8 @@ def AddEmp():
 
     try:
 
-        changefield = (first_name, last_name, pri_skill,location, emp_id)
-		cursor.execute(update_sql, (changefield))
+        changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
+	cursor.execute(update_sql, (changefield))
 		
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -181,10 +193,10 @@ def GetEmpData():
     getempdata = "select * from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
-    (emp_id, first_name, last_name, pri_skill, location) = result[0]   
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket)
 
-    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,image_url=image_url)
+    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
 
 if __name__ == '__main__':
