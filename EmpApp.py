@@ -196,10 +196,10 @@ def GetEmpData():
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
     try:
-        employee = getempdata.query.filter_by(first_name).order_by(emp_id).all()
+        employee = getempdata.filter_by(first_name).order_by(emp_id).all()
         first_name = '<ul>'
         for getempdata in employee:
-            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
+            emp_id +='<li>' + getempdata.first_name + ', ' + getempdata.last_name + ', ' + getempdata.pri_skill + ', ' + getempdata.location + ', ' + getempdata.email + ', ' + getempdata.phone_num + ', ' + getempdata.position + ', ' + getempdata.hire_date + ', ' + getempdata.salary + ', ' + getempdata.benefit + '</li>'
         first_name += '</ul>'
         return first_name
     
