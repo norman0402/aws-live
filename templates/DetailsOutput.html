@@ -273,11 +273,10 @@ th, td {
 					</tr>
 					
 					<tr>
-					{% for getempdata in result %}
-					<td>{{ employee.first_name }}</td>
-					<td>{{ employee.last_name }}</td>
-					<td>{{ employee.email }}</td>
-					<td>{{ employee.position }}</td>
+					{% for result in employee %}
+						<td>{{[result[2], result[1]]|join(' ')}}</td>
+						<td>{{result[5]}}</td>
+						<td>{{result[7]}}</td>	
 					{% endfor %}
 					</tr>
 			</table>
