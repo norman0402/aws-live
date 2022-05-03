@@ -54,7 +54,7 @@ def payroll():
 #staff details page
 @app.route("/staffDet", methods=['GET', 'POST'])
 def staff_details():
-    return render_template('staff_details.html')
+    return render_template('DetailsOutput.html')
 
 #about page
 @app.route("/about", methods=['POST'])
