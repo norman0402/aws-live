@@ -266,20 +266,19 @@ th, td {
             <div class="card mb-4">
 			<table>
 					<tr>
-						<th>First name</th>
-						<th>Last name</th>
+						<th>Full name</th>
 						<th>E-mail</th>
 						<th>Position</th>
 					</tr>
 					
+					{% for result in employee %}
 					<tr>
-					{% for getempdata in result %}
-					<td>{{ employee.first_name }}</td>
-					<td>{{ employee.last_name }}</td>
-					<td>{{ employee.email }}</td>
-					<td>{{ employee.position }}</td>
-					{% endfor %}
+					
+						<td>{{[result[2], result[1]]|join(' ')}}</td>
+						<td>{{result[5]}}</td>
+						<td>{{result[7]}}</td>
 					</tr>
+					{% endfor %}
 			</table>
         </div>
         <footer class="footer pt-3 pb-4">
