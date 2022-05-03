@@ -213,7 +213,7 @@ def GetEmpData():
     return render_template('DetailsOutput.html', employee=employee)
 
 #get SINGLE employee
-@app.route("/getemp/<int:id>", methods=['GET','POST'])
+@app.route("/getemp/<string:id>", methods=['GET','POST'])
 def GetSingleEmpData(id):
     #emp_id = request.form['emp_id']
     emp_id = id
