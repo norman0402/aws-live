@@ -272,11 +272,12 @@ th, td {
 					</tr>
 					
 					{% for result in employee %}
-					<tr>
+					<tr> <a empId="{{result[0]}}" href="{{ url_for('getemp', empId=result[0]) }}>
 					
 						<td>{{[result[2], result[1]]|join(' ')}}</td>
 						<td>{{result[5]}}</td>
 						<td>{{result[7]}}</td>
+					</a>
 					</tr>
 					{% endfor %}
 			</table>
