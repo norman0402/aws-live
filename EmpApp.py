@@ -183,7 +183,7 @@ def DeleteEmp(id):
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
 
-    return render_template('DelEmpOut.html', emp_id=emp_id)
+    return render_template('DeleteEmpOutput.html', emp_id=emp_id)
     
 #get employee
 @app.route("/staffDet", methods=['GET','POST'])
