@@ -232,7 +232,7 @@ def GetEmpId():
     #create a cursor
     cursor = conn.cursor() 
     #execute select statement to fetch data to be displayed in combo/dropdown
-    cursor.execute('SELECT emp_id FROM employee') 
+    cursor.execute('SELECT * FROM employee') 
     #fetch all rows ans store as a set of tuples 
     emps = cursor.fetchall() 
     #render template and send the set of tuples to the HTML file for displaying
