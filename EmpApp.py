@@ -201,6 +201,7 @@ def GetEmpData():
         for getempdata in result:
             emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + str(salary) + ', ' + benefit + '</li>'
         list += emp_id + '</ul>'
+        return list
     
     except Exception as e:
         # e holds description of the error
@@ -209,7 +210,7 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('DetailsOutput.html', list=list)
+    return render_template('DetailsOutput.html')
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
