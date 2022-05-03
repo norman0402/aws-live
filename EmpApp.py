@@ -25,7 +25,7 @@ table = 'employee'
 @app.route('/')
 def home():
     return render_template('index.html')
-	
+    
 #attendance page
 @app.route("/attendance", methods=['GET', 'POST'])
 def attendance():
@@ -38,14 +38,14 @@ def addEmployee():
 
 #get employee page
 @app.route("/getempdata", methods=['GET', 'POST'])
-def addEmployee():
+def getEmployee():
     return render_template('GetEmp.html')
 
 #benefit page
 @app.route("/benefits", methods=['GET', 'POST'])
 def benefits():
     return render_template('benefits.html')
-	
+    
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
@@ -68,10 +68,16 @@ def AddEmp():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
+    email = request.form['email']
+    position = request.form['position']
+    hire_date = request.form['hire_date']
+    salary = request.form['salary']
+    benefit = request.form['benefit']
     location = request.form['location']
+    phone_num = request.form['phone_num']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -79,7 +85,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -113,27 +119,33 @@ def AddEmp():
 
 #edit employee, but currently no edit employee page? also not done
 @app.route("/editemp", methods=['GET','POST'])
-def AddEmp():
+def EditEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
+    email = request.form['email']
+    position = request.form['position']
+    hire_date = request.form['hire_date']
+    salary = request.form['salary']
+    benefit = request.form['benefit']
     location = request.form['location']
+    phone_num = request.form['phone_num']
     emp_image_file = request.files['emp_image_file']
 
-    update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s""
+    update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, email = %s, phone_num = %s, position = %s, hire_date = %s, salary = %s, benefit = %s WHERE emp_id = %s"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-
-        changefield = (first_name, last_name, pri_skill,location, emp_id)
-		cursor.execute(update_sql, (changefield))
-		
+        
+        changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
+        cursor.execute(update_sql, (changefield))
+    
         emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
+        # Upload image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
 
@@ -161,7 +173,7 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('EditEmpOutput.html', name=emp_name)
-	
+    
 #delete employee
 @app.route("/delemp", methods=['GET','POST'])
 def DeleteEmp():
@@ -172,7 +184,7 @@ def DeleteEmp():
     db_conn.commit()
 
     return render_template('DelEmpOut.html', emp_id=emp_id)
-	
+    
 #get employee
 @app.route("/getemp", methods=['GET','POST'])
 def GetEmpData():
@@ -181,10 +193,45 @@ def GetEmpData():
     getempdata = "select * from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
-    (emp_id, first_name, last_name, pri_skill, location) = result[0]   
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket)
 
-    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,image_url=image_url)
+    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
+
+#add attendance
+@app.route("/empattendance", methods=['POST'])
+def EmpAttandance():
+   
+    emp_id = request.form['emp_id']
+    date = request.form['date']
+    time = request.form['time']
+
+    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s)"
+    cursor = db_conn.cursor()
+    
+    try:
+        cursor.execute(insert_sql, (emp_id, date, time))
+        db_conn.commit()
+        status = "Employee " + emp_id + " has checked in at " + date +", " + time 
+
+    except Exception as e:
+            return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
+
+#get payroll
+@app.route("/getpay", methods=['GET','POST'])
+def GetPayroll():
+    emp_id = request.form['emp_id']
+    mycursor = db_conn.cursor()
+    getempdata = "select first_name, last_name, salary from employee WHERE emp_id = %s"
+    mycursor.execute(getempdata,(emp_id))
+    result = mycursor.fetchall()
+    (emp_id, first_name, last_name, salary) = result[0]
+    return render_template('payroll.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=salary)   #not sure send to where
 
 
 if __name__ == '__main__':
