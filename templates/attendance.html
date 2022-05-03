@@ -262,24 +262,27 @@
 				
             </div>
 			<div class = center>
-			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
-			<input style = "width:20%" class="form-control mb-4" placeholder="Employee ID">
+            <form action="/empattend" autocomplete="on" method="POST" enctype="multipart/form-data">
+            <h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
+            <input style = "width:20%" class="form-control mb-4" placeholder="Employee ID"  type="number" name="emp_id">
 
             <div class="dropdown mb-4">
-                <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center;">
-                    -Select attendance-
-                </button>
-				
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                    <li><a class="dropdown-item" href="#">Present</a></li>
-                    <li><a class="dropdown-item" href="#">Medical Leave</a></li>
-                    <li><a class="dropdown-item" href="#">Emergency Leave</a></li>
-					<li><a class="dropdown-item" href="#">Maternity Leave</a></li>
+                <select name="attstatus">
+                    <option value=""> --SELECT-- </option>
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                    <option value="MC">Medical Leave</option>
+                    <option value="Maternity">Maternity Leave</option>
+                    <option value="Emergency">Emergency Leave</option>
+                </select><br><br>
 
-                </ul>
-				
-			</div>
+            </div>
+            		<div class="space">
+                		</div>
+            			<button type="submit" class="btn btn-primary mb-4">Update Attendance</button>
+        		</form>
+		</div>
 			<div class="space">
 				</div>
 			<button class="btn btn-primary mb-4">Update Attendance</button>
