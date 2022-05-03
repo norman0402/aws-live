@@ -214,7 +214,7 @@ def GetEmpData():
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
-def GetEmpData():
+def GetSingleEmpData():
     emp_id = request.form['emp_id']
     mycursor = db_conn.cursor()
     getempdata = "select * from employee WHERE emp_id = %s"
