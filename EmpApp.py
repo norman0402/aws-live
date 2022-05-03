@@ -175,9 +175,9 @@ def EditEmp():
     return render_template('EditEmpOutput.html', name=emp_name)
     
 #delete employee
-@app.route("/delemp", methods=['GET','POST'])
-def DeleteEmp():
-    emp_id = request.form['emp_id']
+@app.route("/delemp/<string:id>", methods=['GET','POST'])
+def DeleteEmp(id):
+    emp_id = id
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
