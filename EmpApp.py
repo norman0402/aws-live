@@ -192,7 +192,7 @@ def GetEmpData():
     mycursor = db_conn.cursor()
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
-    result = mycursor.fetchall()
+    employee = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
     try:
@@ -210,7 +210,7 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('DetailsOutput.html')
+    return render_template('DetailsOutput.html', employee=employee)
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
