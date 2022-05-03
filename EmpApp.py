@@ -196,10 +196,10 @@ def GetEmpData():
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
     try:
-        employee = getempdata.query.filter_by(first_name).order_by(emp_id).all()
+        employee = getempdata.filter_by(first_name).order_by(emp_id).all()
         first_name = '<ul>'
         for getempdata in employee:
-            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
+            emp_id +='<li>' + getempdata.first_name + ', ' + getempdata.last_name + ', ' + getempdata.pri_skill + ', ' + getempdata.location + ', ' + getempdata.email + ', ' + getempdata.phone_num + ', ' + getempdata.position + ', ' + getempdata.hire_date + ', ' + getempdata.salary + ', ' + getempdata.benefit + '</li>'
         first_name += '</ul>'
         return first_name
     
@@ -210,7 +210,20 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
+    return render_template('DetailsOutput.html')
+
+#get SINGLE employee
+@app.route("/getemp", methods=['GET','POST'])
+def GetEmpData():
+    emp_id = request.form['emp_id']
+    mycursor = db_conn.cursor()
+    getempdata = "select * from employee WHERE emp_id = %s"
+    mycursor.execute(getempdata,(emp_id))
+    result = mycursor.fetchall()
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
+    image_url = showimage(bucket)
+
+    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
 #add attendance
 @app.route("/empattendance", methods=['POST'])
