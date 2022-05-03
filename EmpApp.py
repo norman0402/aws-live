@@ -193,9 +193,9 @@ def GetEmpData():
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
     employee = mycursor.fetchall()
-    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
+    #(emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
-    try:
+    """try:
         #employee = getempdata.filter_by(first_name).order_by(emp_id).all()
         list = '<ul>'
         for getempdata in result:
@@ -207,7 +207,7 @@ def GetEmpData():
         # e holds description of the error
         error_text = "<p>The error:<br>" + str(e) + "</p>"
         hed = '<h1>Something is broken.</h1>'
-        return hed + error_text
+        return hed + error_text"""
     
 
     return render_template('DetailsOutput.html', employee=employee)
