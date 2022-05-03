@@ -209,7 +209,7 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
+    return render_template('DetailsOutput.html')
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
