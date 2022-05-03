@@ -230,11 +230,10 @@ def GetSingleEmpData(id):
 @app.route("/empattid", methods=['GET','POST'])
 def GetEmpId(): 
     #create a cursor
-    cursor = conn.cursor() 
-    #execute select statement to fetch data to be displayed in combo/dropdown
-    cursor.execute('SELECT * FROM employee')
-    #fetch all rows ans store as a set of tuples 
-    emps = cursor.fetchall() 
+    mycursor = db_conn.cursor()
+    getempdata = "select * from employee"
+    mycursor.execute(getempdata)
+    emps = mycursor.fetchall()
     #render template and send the set of tuples to the HTML file for displaying
     return render_template("attendance.html",emps=emps )
 
