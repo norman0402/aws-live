@@ -54,7 +54,7 @@ def payroll():
 #staff details page
 @app.route("/staffDet", methods=['GET', 'POST'])
 def staff_details():
-    return render_template('staff_details.html')
+    return render_template('DetailsOutput.html')
 
 #about page
 @app.route("/about", methods=['POST'])
@@ -195,6 +195,20 @@ def GetEmpData():
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket)
+    
+    try:
+        employee = getempdata.query.filter_by(first_name).order_by(emp_id).all()
+        first_name = '<ul>'
+        for getempdata in employee:
+            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
+            first_name += '<ul>'
+    
+    except Exception as e:
+        # e holds description of the error
+        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        hed = '<h1>Something is broken.</h1>'
+        return hed + error_text
+    
 
     return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
@@ -203,17 +217,16 @@ def GetEmpData():
 def EmpAttandance():
    
     emp_id = request.form['emp_id']
-    att_id = request.form['att_id']
     date = request.form['date']
     time = request.form['time']
 
-    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s)"
     cursor = db_conn.cursor()
     
     try:
-        cursor.execute(insert_sql, (emp_id, att_id, date, time))
+        cursor.execute(insert_sql, (emp_id, date, time))
         db_conn.commit()
-        status = "Employee " + emp_id + ", " + att_id + " has checked in at " + date +", " + time 
+        status = "Employee " + emp_id + " has checked in at " + date +", " + time 
 
     except Exception as e:
             return str(e)
@@ -221,7 +234,7 @@ def EmpAttandance():
     finally:
         cursor.close()
 
-    return render_template('AttOutput.html', status=status) #currently no attendanceOutput.html or any similiar page
+    return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
 
 #get payroll
 @app.route("/getpay", methods=['GET','POST'])

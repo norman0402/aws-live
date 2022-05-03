@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Information</title>
+</head>
+<center>
+	<font color="black" size="5" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Employee Information</h1>
+
+		<body bgcolor="lightgrey">
+
+			<form>
+
+				<div>
+
+			  		Employee ID:<br> {{ emp_id }} <br><br>
+
+			  		First Name:<br> {{ first_name }} <br><br>
+
+			  		Last Name:<br> {{ last_name }} <br><br>
+
+			  		Primary Skill:<br> {{ pri_skill }} <br><br>
+
+			  		Location:<br> {{ location }} <br><br>
+					
+					E-mail:<br> {{ email }} <br><br>
+					
+					Phone number:<br> {{ phone_num }} <br><br>
+					
+					Position:<br> {{ position }} <br><br>
+					
+					Hire Date:<br> {{hire_date }} <br><br>
+					
+					Salary:<br> {{ salary }} <br><br>
+
+			  		Benefit: <br> {{ benefit }} <br><br>
+
+			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
+
+			  	</div>
+
+			</form>
+			
+			<tr>
+					
+				<td>{{ employee.emp_id }}</td>
+				<td>{{ employee.first_name }}</td>
+				<td>${{ employee.last_name }}</td>
+				<td>{{ employee.pri_skill }}</td>
+				<td>{{ employee.location }}</td>
+				<td>{{ employee.email }}</td>
+				<td>{{ employee.phone_num }}</td>
+				<td>{{ employee.position }}</td>
+				<td>{{ employee.hire_date }}</td>
+				<td>{{ employee.salary }}</td>
+				<td>{{ employee.benefit }}</td>
+				
+				</tr>
+
+		</body>
+
+	</font>
+</center>
+</html>
