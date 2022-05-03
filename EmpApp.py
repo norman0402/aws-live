@@ -210,7 +210,7 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('DetailsOutput.html', list)
+    return render_template('DetailsOutput.html')
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
