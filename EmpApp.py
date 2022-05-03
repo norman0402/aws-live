@@ -260,6 +260,18 @@ def GetPayroll():
     (emp_id, first_name, last_name, salary) = result[0]
     return render_template('payroll.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=salary)   #not sure send to where
 
+def showimage(bucket):
+    s3_client = boto3.client('s3')
+    public_urls = []
+    emp_id = request.form['emp_id']
+    try:
+        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            public_urls.append(presigned_url)
+    except Exception as e:
+        pass
+    return public_urls
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
