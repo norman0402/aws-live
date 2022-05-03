@@ -282,8 +282,8 @@
                     <option value="Emergency">Emergency Leave</option>
                 </select><br><br>
 		    <ul>
-			{% for emp_id, first_name in emps %}
-                		<li value="{{emp_id}}">{{ emp_id }}</li>
+			{% for e in emps %}
+                		<li value="{{e[0]}}">{{ e[0] }}</li>
                 	{% endfor %}
 		    </ul>
             </div>
