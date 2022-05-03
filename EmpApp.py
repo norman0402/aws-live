@@ -200,7 +200,7 @@ def GetEmpData():
         employee = getempdata.query.filter_by(pri_skill).order_by(emp_id).all()
         first_name = '<ul>'
         for getempdata in employee:
-            emp_id +='<li>' + first_name + ', ' last_name', '+ pri_skill +', '+ location +', '+ email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
+            emp_id +='<li>' + first_name + ', ' last_name + ', '+ pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
          first_name += '<ul>'
     
     except Exception as e:
