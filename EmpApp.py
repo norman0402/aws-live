@@ -193,8 +193,7 @@ def GetEmpData():
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
     result = mycursor.fetchall()
-    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
-    image_url = showimage(bucket)
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
     try:
         employee = getempdata.query.filter_by(first_name).order_by(emp_id).all()
@@ -210,7 +209,7 @@ def GetEmpData():
         return hed + error_text
     
 
-    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
+    return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
 
 #get SINGLE employee
 @app.route("/getemp", methods=['GET','POST'])
