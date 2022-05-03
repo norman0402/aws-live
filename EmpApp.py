@@ -188,10 +188,10 @@ def DeleteEmp():
 #get employee
 @app.route("/staffDet", methods=['GET','POST'])
 def GetEmpData():
-    emp_id = request.form['emp_id']
+    
     mycursor = db_conn.cursor()
-    getempdata = "select * from employee WHERE emp_id = %s"
-    mycursor.execute(getempdata,(emp_id))
+    getempdata = "select * from employee"
+    mycursor.execute(getempdata)
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket)
