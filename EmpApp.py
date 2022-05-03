@@ -199,7 +199,7 @@ def GetEmpData():
         #employee = getempdata.filter_by(first_name).order_by(emp_id).all()
         first_name = '<ul>'
         for getempdata in result:
-            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + salary + ', ' + benefit + '</li>'
+            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + str(salary) + ', ' + benefit + '</li>'
         first_name += '</ul>'
         return first_name
     
