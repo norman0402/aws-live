@@ -225,6 +225,18 @@ def GetSingleEmpData():
 
     return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
+#Get Employee ID
+@app.route('/empattid') 
+def GetEmpId(): 
+    #create a cursor
+    cursor = conn.cursor() 
+    #execute select statement to fetch data to be displayed in combo/dropdown
+    cursor.execute('SELECT * emp_id FROM employee INNER JOIN attendance ON employee.emp_id=attendance.emp_id') 
+    #fetch all rows ans store as a set of tuples 
+    emps = cursor.fetchall() 
+    #render template and send the set of tuples to the HTML file for displaying
+    return render_template("attendance.html",emps=emps )
+
 #add attendance
 @app.route("/empattendance", methods=['POST'])
 def EmpAttandance():
