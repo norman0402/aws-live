@@ -52,7 +52,7 @@ def payroll():
     return render_template('payroll.html')
 
 #staff details page
-@app.route("/staffDet", methods=['GET', 'POST'])
+@app.route("/staff", methods=['GET', 'POST'])
 def staff_details():
     return render_template('DetailsOutput.html')
 
@@ -186,12 +186,12 @@ def DeleteEmp():
     return render_template('DelEmpOut.html', emp_id=emp_id)
     
 #get employee
-@app.route("/getemp", methods=['GET','POST'])
+@app.route("/staffDet", methods=['GET','POST'])
 def GetEmpData():
-    emp_id = request.form['emp_id']
+    
     mycursor = db_conn.cursor()
-    getempdata = "select * from employee WHERE emp_id = %s"
-    mycursor.execute(getempdata,(emp_id))
+    getempdata = "select * from employee"
+    mycursor.execute(getempdata)
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket)
