@@ -42,6 +42,7 @@
 
 			</form>
 			
+			{% for getempdata in result %}
 			<tr>
 					
 				<td>{{ employee.emp_id }}</td>
@@ -56,7 +57,8 @@
 				<td>{{ employee.salary }}</td>
 				<td>{{ employee.benefit }}</td>
 				
-				</tr>
+			</tr>
+			{% endfor %}
 
 		</body>
 
