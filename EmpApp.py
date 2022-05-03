@@ -115,7 +115,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    return render_template('AddEmpOutput.html')
 
 #edit employee, but currently no edit employee page? also not done
 @app.route("/editemp", methods=['GET','POST'])
