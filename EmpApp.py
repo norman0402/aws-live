@@ -262,15 +262,15 @@ def EmpAttandance():
     return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
 
 #get payroll
-@app.route("/getpay", methods=['GET','POST'])
-def GetPayroll():
-    emp_id = request.form['emp_id']
+@app.route("/getpay/<string:id>", methods=['GET','POST'])
+def GetPayroll(id):
+    #emp_id = request.form['emp_id']
     mycursor = db_conn.cursor()
     getempdata = "select first_name, last_name, salary from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, salary) = result[0]
-    return render_template('payroll.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=salary)   #not sure send to where
+    return render_template('PayrollDetails.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=salary)
 
 def showimage(bucket):
     s3_client = boto3.client('s3')
