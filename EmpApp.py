@@ -52,7 +52,7 @@ def payroll():
     return render_template('payroll.html')
 
 #staff details page
-@app.route("/staffDet", methods=['GET', 'POST'])
+@app.route("/staff", methods=['GET', 'POST'])
 def staff_details():
     return render_template('DetailsOutput.html')
 
@@ -186,7 +186,7 @@ def DeleteEmp():
     return render_template('DelEmpOut.html', emp_id=emp_id)
     
 #get employee
-@app.route("/getemp", methods=['GET','POST'])
+@app.route("/staffDet", methods=['GET','POST'])
 def GetEmpData():
     emp_id = request.form['emp_id']
     mycursor = db_conn.cursor()
