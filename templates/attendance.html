@@ -269,6 +269,7 @@
                 		{% for emp_id, first_name in emps %}
 					<option value="{{ emp_id }}">{{ first_name}}</option>
                     		{% endfor %}
+				
             		</select>
 
             <div class="dropdown mb-4">
@@ -280,6 +281,11 @@
                     <option value="Maternity">Maternity Leave</option>
                     <option value="Emergency">Emergency Leave</option>
                 </select><br><br>
+		    <ul>
+			{% for emp_id, first_name in emps %}
+                		<li value="{{emp_id}}">{{ emp_id }}</li>
+                	{% endfor %}
+		    </ul>
             </div>
 
             <div class="space">
