@@ -213,9 +213,10 @@ def GetEmpData():
     return render_template('DetailsOutput.html', employee=employee)
 
 #get SINGLE employee
-@app.route("/getemp", methods=['GET','POST'])
-def GetSingleEmpData():
-    emp_id = request.form['emp_id']
+@app.route("/getemp/<int:id>", methods=['GET','POST'])
+def GetSingleEmpData(id):
+    #emp_id = request.form['emp_id']
+    emp_id = id
     mycursor = db_conn.cursor()
     getempdata = "select * from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
@@ -226,7 +227,7 @@ def GetSingleEmpData():
     return render_template('GetEmpDataOut.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
 #Get Employee ID
-@app.route('/empattid')
+@app.route("/empattid", methods=['GET','POST'])
 def GetEmpId(): 
     #create a cursor
     cursor = conn.cursor() 
