@@ -193,7 +193,7 @@ def GetEmpData():
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
     result = mycursor.fetchall()
-    #(emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     
     try:
         #employee = getempdata.filter_by(first_name).order_by(emp_id).all()
