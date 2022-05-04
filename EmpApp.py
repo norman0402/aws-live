@@ -138,14 +138,14 @@ def EditEmp():
     benefit = request.form['benefit']
     location = request.form['location']
     phone_num = request.form['phone_num']
-    emp_image_file = request.files['emp_image_file']
+    #emp_image_file = request.files['emp_image_file']
 
     update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, email = %s, phone_num = %s, position = %s, hire_date = %s, salary = %s, benefit = %s WHERE emp_id = %s"
     cursor = db_conn.cursor()
-
+"""
     if emp_image_file.filename == "":
         return "Please select a file"
-
+"""
     try:
         
         changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
@@ -153,6 +153,7 @@ def EditEmp():
     
         emp_name = "" + first_name + " " + last_name
         # Upload image file in S3 #
+        """
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
 
@@ -171,7 +172,7 @@ def EditEmp():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-
+"""
         except Exception as e:
             return str(e)
 
