@@ -273,7 +273,7 @@ def EmpAttandance():
     try:
         cursor.execute(insert_sql, (emp_id, date, time, status))
         db_conn.commit()
-        empstatus = "Employee " + emp_id + " has checked in at " + date +", " + time 
+        empstatus = "Employee " + emp_id + " has updated status at " + date +", " + time 
 
     except Exception as e:
             return str(e)
