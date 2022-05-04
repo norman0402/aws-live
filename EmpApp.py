@@ -26,10 +26,15 @@ table = 'employee'
 def home():
     return render_template('index.html')
     
-#attendance page
-@app.route("/attendance", methods=['GET', 'POST'])
+#Get attendance list
+@app.route("/attendanceList", methods=['GET', 'POST'])
 def attendance():
-    return render_template('attendance.html')
+    mycursor = db_conn.cursor()
+    getempdata = "select * from attendance"
+    mycursor.execute(getempdata)
+    attendance = mycursor.fetchall()  
+
+    return render_template('AttendanceList.html', attendance=attendance)
 
 #add new employee page
 @app.route("/addnewemp", methods=['GET', 'POST'])
