@@ -267,14 +267,11 @@ th, td {
 						<th>Salary</th>
 						<th>EPF (9%)</th>
 					</tr>
-					
-					{% for result in employee %}
 					<tr> 
 						<td>{{[first_name, last_name|join(' ')]}}</td>
 						<td>{{salary}}</td>
 						<td>{{salary*0.09}}</td>
 					</tr>
-					{% endfor %}
 			</table>
 			
 			 
