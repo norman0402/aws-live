@@ -266,7 +266,7 @@
 			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
             		<select name="emp_id" id="emp_id" class="form-control mb-4" placeholder="Employee ID" >
                 		<option value="" readonly>Employee ID</option>
-                		{% for e in emps %}
+                		{% for e in result %}
 					<option value="{{ e[0] }}">{{[e[1], e[2]]|join(' ')}}</option>
                     		{% endfor %}
 				
