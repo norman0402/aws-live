@@ -268,9 +268,9 @@ th, td {
 						<th>EPF (9%)</th>
 					</tr>
 					<tr> 
-						<td>{{[first_name, last_name|join(' ')]}}</td>
+						<td>{{first_name, last_name|join(' ')}}</td>
 						<td>{{salary}}</td>
-						<td>{{salary | float}}</td>
+						<td>{{"$%.2f"| format(salary) | float}}</td>
 					</tr>
 			</table>
 			
