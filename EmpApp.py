@@ -287,6 +287,13 @@ def EmpAttandance():
 @app.route("/getpay/<string:id>", methods=['GET','POST'])
 def GetPayroll(id):
     #emp_id = request.form['emp_id']
+    if emp_id == "":
+        mycursor = db_conn.cursor()
+        getempdata = "select * from employee"
+        mycursor.execute(getempdata)
+        result = mycursor.fetchall()
+        return render_template("payroll.html", err="Please Fill In All Fields!", result=result )
+
     mycursor = db_conn.cursor()
     getempdata = "select first_name, last_name, salary from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
