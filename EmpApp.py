@@ -148,11 +148,11 @@ def EditEmp():
         cursor.execute(update_sql, (changefield))
     
         emp_name = "" + first_name + " " + last_name
-        except Exception as e:
-            return str(e)
+    except Exception as e:
+        return str(e)
 
     finally:
-            cursor.close()
+        cursor.close()
 
     print("all modification done...")
     return render_template('EditEmpOutput.html', name=emp_name)
