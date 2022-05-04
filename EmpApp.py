@@ -53,9 +53,9 @@ def payroll():
     mycursor = db_conn.cursor()
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
-    emps = mycursor.fetchall()
+    result = mycursor.fetchall()
     #render template and send the set of tuples to the HTML file for displaying
-    return render_template('payroll.html',emps=emps)
+    return render_template('payroll.html',result=result)
 
 #staff details page
 @app.route("/staff", methods=['GET', 'POST'])
