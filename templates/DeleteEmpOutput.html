@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Check Payroll Details</title>
+    <title>Delete Employee Output</title>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css">
@@ -11,11 +11,9 @@
 </head>
 
 <style>
-.center {
-  margin: auto;
-  width: 60%;
-  border: 3px solid #9932CC;
-  padding: 10px;
+img {
+ max-width: 100%;
+ max-height: 70%;
 }
 </style>
 
@@ -133,9 +131,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Payroll Details</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Delete Employee Output</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0" style="font-size:25px">Payroll Details</h6>
+                    <h6 class="font-weight-bolder mb-0" style="font-size:25px">Delete Employee Output</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -145,7 +143,6 @@
                         </div>
                     </div>
                     <ul class="navbar-nav  justify-content-end">
-                        
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -238,46 +235,32 @@
             </div>
         </nav>
         <div class="container-fluid pt-3">
+            
+            <div class="card mb-4" style="text-align:center">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="d-flex flex-column h-100">
+                                <p class="mb-1 pt-2 text-bold" style="font-size:20px">Deleted Successfully &#127881;</p>
+                                <h5 class="font-weight-bolder">{{  emp_id  }}</h5>
+                                <p class="mb-5">Has been removed from the database.</p>
+                               <form action="http://3.134.115.108:80/" autocomplete="on" method = "GET">
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+					<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
+
+				</form>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn bg-gradient-primary">Save changes</button>
+                        <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                            <div class="bg-gradient-primary border-radius-lg h-100">
+                                <img src="https://demos.creative-tim.com/soft-ui-dashboard/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                                <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                                    <img class="w-100 position-relative z-index-2 pt-4" src="https://t4.ftcdn.net/jpg/02/40/52/23/360_F_240522376_RieGoGnbatkJVSXY3VvUG5rqYbPpmNK4.jpg">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card mb-4">
-                
-                <div class="card-body">
-                   <div class = center>
-            		<form action="/empattid" autocomplete="on" method="POST" enctype="multipart/form-data">
-			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
-            		<select name="emp_id" class="form-control mb-4" placeholder="Employee ID" >
-                		<option value="" readonly>Employee ID</option>
-                		{% for emp in emps %}
-                			<option value="{{emp[0]}}">{{ emp[1] }}</option>
-                		{% endfor %}
-            		</select>
-
-            <div class="space">
-                </div>
-            <button type="submit" class="btn btn-primary mb-4 w-100 "id="{{result[0]}}" onclick="location.href='{{ url_for('GetPayroll', id=result[0]) }}'">Check</button>
-        </form>
-        </div>
-                </div>
-
             </div>
         </div>
 
