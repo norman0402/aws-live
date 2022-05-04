@@ -286,6 +286,7 @@ def EmpAttandance():
 #get payroll
 @app.route("/getpay/<string:id>", methods=['GET','POST'])
 def GetPayroll(id):
+    emp_id = id
     #emp_id = request.form['emp_id']
     if emp_id == "":
         mycursor = db_conn.cursor()
