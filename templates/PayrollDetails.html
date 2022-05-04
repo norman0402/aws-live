@@ -270,9 +270,9 @@ th, td {
 					
 					{% for result in employee %}
 					<tr> 
-						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{[result[2], result[1]]|join(' ')}}</a></td>
-						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{result[9]}}</a></td>
-						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{result[9]*0.09}}</a></td>
+						<td>{{[first_name, last_name|join(' ')}}</td>
+						<td>{{salary}}</td>
+						<td>{{salary*0.09}}</td>
 					</tr>
 					{% endfor %}
 			</table>
