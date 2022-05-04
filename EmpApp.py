@@ -192,7 +192,7 @@ def GetEditData(id):
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
 
-    return render_template('EditEmp.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
+    return render_template('EditEmp.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit, result=result)
     
 #delete employee
 @app.route("/delemp/<string:id>", methods=['GET','POST'])
