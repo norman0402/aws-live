@@ -270,8 +270,7 @@ th, td {
 					<tr> 
 						<td>{{first_name ~', ' ~ last_name}}</td>
 						<td>{{salary}}</td>
-						{% set sal="%.2f"|format(salary|float)%}
-						<td>{{"RM%.2f"|sal * 0.09}}</td>
+						<td>{{"RM%.2f"|format(salary|float)}}</td>
 					</tr>
 			</table>
 			
