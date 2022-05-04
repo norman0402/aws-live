@@ -255,8 +255,8 @@ th, td {
 						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{[result[2], result[1]]|join(' ')}}</a></td>
 						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{result[5]}}</a></td>
 						<td><a id="{{result[0]}}" href="{{ url_for('GetSingleEmpData', id=result[0]) }}">{{result[7]}}</a></td>
-						<td><button class="btn-success" style="border-radius: 8px" id="{{result[0]}}" onclick="location.href='{{ url_for('GetEditData', id=result[0]) }}'">Edit</button></td>
-						<td><button class="btn-danger" style="border-radius: 8px" id="{{result[0]}}" onclick="location.href='{{ url_for('DeleteEmp', id=result[0]) }}'">Delete</button></td>
+						<td><button class="btn-success" style="border-radius: 6px" id="{{result[0]}}" onclick="location.href='{{ url_for('GetEditData', id=result[0]) }}'">Edit</button></td>
+						<td><button class="btn-danger" style="border-radius: 6px" id="{{result[0]}}" onclick="location.href='{{ url_for('DeleteEmp', id=result[0]) }}'">Delete</button></td>
 					</tr>
 					{% endfor %}
 			</table>
