@@ -64,7 +64,7 @@ def staff_details():
     return render_template('DetailsOutput.html')
 
 #about page
-@app.route("/about")
+@app.route("/about", methods=['GET'])
 def about():
     return render_template('https://youtu.be/ih9zBLDr_ro')
 
