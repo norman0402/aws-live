@@ -263,7 +263,7 @@ def EmpAttandance():
     insert_sql = "INSERT INTO attendance (emp_id, date, time, status) VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
     
-    if emp_id == "" || status == "":
+    if emp_id == "" or status == "":
         mycursor = db_conn.cursor()
         getempdata = "select * from employee"
         mycursor.execute(getempdata)
