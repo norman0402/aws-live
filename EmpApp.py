@@ -49,7 +49,13 @@ def benefits():
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
-    return render_template('payroll.html')
+       #create a cursor
+    mycursor = db_conn.cursor()
+    getempdata = "select * from employee"
+    mycursor.execute(getempdata)
+    emps = mycursor.fetchall()
+    #render template and send the set of tuples to the HTML file for displaying
+    return render_template('payroll.html',emps=emps)
 
 #staff details page
 @app.route("/staff", methods=['GET', 'POST'])
