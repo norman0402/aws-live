@@ -262,19 +262,19 @@
                 
                 <div class="card-body">
                    <div class = center>
-            		<form action="/getpay/<string:id>" autocomplete="on" method="POST" enctype="multipart/form-data">
+            		<form action="/getpay" autocomplete="on" method="POST" enctype="multipart/form-data">
 			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
             		<select name="emp_id" id="emp_id" class="form-control mb-4" placeholder="Employee ID" >
-                		<option id="0" value="0" readonly>Employee ID</option>
+                		<option value="0" readonly>Employee ID</option>
                 		{% for e in result %}
-					<option id="{{ e[0] }}" value="{{ e[0] }}">{{[e[1], e[2]]|join(' ')}}</option>
+					<option value="{{ e[0] }}">{{[e[1], e[2]]|join(' ')}}</option>
                     		{% endfor %}
 				
             		</select>
 		<span style="color: red;">{{ err }}</span>
             <div class="space">
                 </div>
-            <button type="submit" class="btn btn-primary mb-4 w-100 "id="{{result[0]}}" onclick="location.href='{{ url_for('GetPayroll', id=result[0]) }}'">Check</button>
+            <button type="submit" class="btn btn-primary mb-4 w-100 ">Check</button>
         </form>
         </div>
                 </div>
