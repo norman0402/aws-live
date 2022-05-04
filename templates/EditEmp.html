@@ -303,15 +303,8 @@
                             </div>
                         </div>
 			<div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-address">Hire Date</label>
-                                        <input id="{{result[0]}}" class="form-control" href="{{ url_for('GetSingleEmpData', id=result[0]) }}" value = {{hire_date}} required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
+                            <div>
+				<div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-city">Salary</label>
@@ -322,6 +315,14 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-country">Benefit</label>
                                         <input id="{{result[0]}}" class="form-control" href="{{ url_for('GetSingleEmpData', id=result[0]) }}" value = {{benefit}} required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-address">Hire Date</label>
+                                        <input id="{{result[0]}}" class="form-control" href="{{ url_for('GetSingleEmpData', id=result[0]) }}" value = {{hire_date}} required>
                                     </div>
                                 </div>
                             </div>
