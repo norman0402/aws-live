@@ -66,7 +66,7 @@ def staff_details():
 #about page
 @app.route("/about", methods=['POST'])
 def about():
-    return render_template('www.intellipaat.com')
+    return render_template('https://youtu.be/ih9zBLDr_ro')
 
 #add employee
 @app.route("/addemp", methods=['POST'])
