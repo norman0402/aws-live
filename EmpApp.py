@@ -142,12 +142,8 @@ def EditEmp():
 
     update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, email = %s, phone_num = %s, position = %s, hire_date = %s, salary = %s, benefit = %s WHERE emp_id = %s"
     cursor = db_conn.cursor()
-"""
-    if emp_image_file.filename == "":
-        return "Please select a file"
-"""
+
     try:
-        
         changefield = (first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit, emp_id)
         cursor.execute(update_sql, (changefield))
     
