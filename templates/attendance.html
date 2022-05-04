@@ -264,7 +264,7 @@
 		<div class = center>
             		<form action="/empattid" autocomplete="on" method="POST" enctype="multipart/form-data">
 			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
-            		<select name="emp_id" class="form-control mb-4" placeholder="Employee ID" >
+            		<select name="emp_id" id="emp_id" class="form-control mb-4" placeholder="Employee ID" >
                 		<option value="" readonly>Employee ID</option>
                 		{% for e in emps %}
 					<option value="{{ e[0] }}">{{[n[1], n[2]]|join(' ')}}</option>
