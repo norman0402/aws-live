@@ -271,7 +271,7 @@
                     		{% endfor %}
 				
             		</select>
-
+		<span style="color: red;">{{ err }}</span>
             <div class="space">
                 </div>
             <button type="submit" class="btn btn-primary mb-4 w-100 "id="{{result[0]}}" onclick="location.href='{{ url_for('GetPayroll', id=result[0]) }}'">Check</button>
