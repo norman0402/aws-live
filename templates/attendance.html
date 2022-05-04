@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="javascript:;" onclick="location.href='/attendance'">
+                    <a class="nav-link  " href="javascript:;" onclick="location.href='/empattid'">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <title>office</title>
@@ -262,12 +262,12 @@
 				
             </div>
 		<div class = center>
-            		<form action="/empattid" autocomplete="on" method="POST" enctype="multipart/form-data">
+            		<form action="/empattendance" autocomplete="on" method="POST" enctype="multipart/form-data">
 			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
-            		<select name="emp_id" class="form-control mb-4" placeholder="Employee ID" >
+            		<select name="emp_id" id="emp_id" class="form-control mb-4" placeholder="Employee ID" >
                 		<option value="" readonly>Employee ID</option>
-                		{% for emp_id, first_name in emps %}
-					<option value="{{ emp_id }}">{{ first_name}}</option>
+                		{% for e in emps %}
+					<option value="{{ e[0] }}">{{[n[1], n[2]]|join(' ')}}</option>
                     		{% endfor %}
 				
             		</select>
@@ -281,11 +281,6 @@
                     <option value="Maternity">Maternity Leave</option>
                     <option value="Emergency">Emergency Leave</option>
                 </select><br><br>
-		    <ul>
-			{% for e in emps %}
-                		<li value="{{e[0]}}">{{ e[0] }}</li>
-                	{% endfor %}
-		    </ul>
             </div>
 
             <div class="space">
