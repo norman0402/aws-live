@@ -288,7 +288,7 @@ def EmpAttandance():
 def GetPayroll(id):
     emp_id = id
     #emp_id = request.form['emp_id']
-    if emp_id == "":
+    if emp_id == "0":
         mycursor = db_conn.cursor()
         getempdata = "select * from employee"
         mycursor.execute(getempdata)
