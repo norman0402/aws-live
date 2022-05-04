@@ -249,16 +249,18 @@ def GetEmpId():
 def EmpAttandance():
    
     emp_id = request.form['emp_id']
-    date = request.form['date']
-    time = request.form['time']
+    now = datetime.now()
+    date = now.strftime("%Y-%m-%d")
+    time = now.strftime("%H:%M:%S")
+    status = request.form['attstatus']
 
-    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s)"
+    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
     
     try:
-        cursor.execute(insert_sql, (emp_id, date, time))
+        cursor.execute(insert_sql, (emp_id, date, time, status))
         db_conn.commit()
-        status = "Employee " + emp_id + " has checked in at " + date +", " + time 
+        empstatus = "Employee " + emp_id + " has checked in at " + date +", " + time 
 
     except Exception as e:
             return str(e)
@@ -266,7 +268,7 @@ def EmpAttandance():
     finally:
         cursor.close()
 
-    return render_template('Index.html', status=status) #currently no attendanceOutput.html or any similiar page
+    return render_template('Index.html', status=empstatus) #currently no attendanceOutput.html or any similiar page
 
 #get payroll
 @app.route("/getpay/<string:id>", methods=['GET','POST'])
