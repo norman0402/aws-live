@@ -46,11 +46,6 @@ def addEmployee():
 @app.route("/getempdata", methods=['GET', 'POST'])
 def getEmployee():
     return render_template('GetEmp.html')
-
-#benefit page
-@app.route("/benefits", methods=['GET', 'POST'])
-def benefits():
-    return render_template('benefits.html')
     
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
@@ -219,22 +214,6 @@ def GetEmpData():
     mycursor.execute(getempdata)
     employee = mycursor.fetchall()
     #(emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
-    
-    """try:
-        #employee = getempdata.filter_by(first_name).order_by(emp_id).all()
-        list = '<ul>'
-        for getempdata in result:
-            emp_id +='<li>' + first_name + ', ' + last_name + ', ' + pri_skill + ', ' + location + ', ' + email + ', ' + phone_num + ', ' + position + ', ' + hire_date + ', ' + str(salary) + ', ' + benefit + '</li>'
-        list  += emp_id + '</ul>'
-        #return list
-    
-    except Exception as e:
-        # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
-        hed = '<h1>Something is broken.</h1>'
-        return hed + error_text"""
-    
-
     return render_template('DetailsOutput.html', employee=employee)
 
 #get SINGLE employee
