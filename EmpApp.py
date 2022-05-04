@@ -260,7 +260,7 @@ def EmpAttandance():
     time = now.strftime("%H:%M:%S")
     status = request.form['attstatus']
 
-    insert_sql = "INSERT INTO attendance VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO attendance (emp_id, date,time,status) VALUES (%s,%s,%s,%s)
     cursor = db_conn.cursor()
     
     try:
