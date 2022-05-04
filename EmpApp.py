@@ -295,7 +295,7 @@ def GetPayroll():
         return render_template("payroll.html", err="Please Fill In All Fields!", result=result )
 
     mycursor = db_conn.cursor()
-    getempdata = "select first_name, last_name, salary from employee WHERE emp_id = %s"
+    getempdata = "select emp_id, first_name, last_name, salary from employee WHERE emp_id = %s"
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, salary) = result[0]
