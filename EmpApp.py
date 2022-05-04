@@ -228,10 +228,10 @@ def GetSingleEmpData(id):
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
-    #image_url = showimage(bucket, id)
+    image_url = showimage(bucket, id)
     # commented as not sure S3 image work or not
     #return render_template('GetEmpOutput.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit, image_url=image_url)
-    return render_template('GetEmpOutput.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
+    return render_template('GetEmpOutput.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
 #Get Employee ID
 @app.route("/empattid", methods=['GET','POST'])
@@ -285,9 +285,10 @@ def showimage(bucket, id):
     s3_client = boto3.client('s3')
     public_urls = []
     emp_id = id
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
         for item in s3_client.list_objects(Bucket=bucket)['Contents']:
-            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3}, ExpiresIn = 100)
             public_urls.append(presigned_url)
     except Exception as e:
         pass
