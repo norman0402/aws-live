@@ -263,6 +263,13 @@ def EmpAttandance():
     insert_sql = "INSERT INTO attendance (emp_id, date, time, status) VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
     
+    if emp_id == "Employee ID":
+        mycursor = db_conn.cursor()
+        getempdata = "select * from employee"
+        mycursor.execute(getempdata)
+        emps = mycursor.fetchall()
+        return render_template("attendance.html", err="Please select an Employee ID", emps=emps )
+    
     try:
         cursor.execute(insert_sql, (emp_id, date, time, status))
         db_conn.commit()
