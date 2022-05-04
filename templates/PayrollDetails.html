@@ -242,13 +242,17 @@ th, td {
 			<table>
 					<tr>
 						<th>Full name</th>
-						<th>Salary</th>
-						<th>EPF (9%)</th>
+						<th>Base Salary</th>
+						<th>EPF- Individual Contribution (9%)</th>
+						<th>EPF- Company Contribution (12%)</th>
+						<th>Nett Salary</th>
 					</tr>
 					<tr> 
 						<td>{{first_name ~' ' ~ last_name}}</td>
 						<td>{{"RM{:.2f}".format(salary|float)}}</td>
 						<td>{{"RM{:.2f}".format(salary*0.09|float) }}</td>
+						<td>{{"RM{:.2f}".format(salary*0.12|float) }}</td>
+						<td>{{"RM{:.2f}".format(salary - (salary*0.09)|float) }}</td>
 					</tr>
 			</table>
 			
