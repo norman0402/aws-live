@@ -312,7 +312,7 @@ def GetPayroll():
     mycursor.execute(getempdata,(emp_id))
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, salary) = result[0]
-    return render_template('PayrollDetails.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=float(salary))
+    return render_template('PayrollDetails.html', emp_id=emp_id,first_name=first_name,last_name=last_name,salary=float(round(salary, 2)))
 
 def showimage(bucket, id):
     s3_client = boto3.client('s3')
