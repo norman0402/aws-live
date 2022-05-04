@@ -248,7 +248,7 @@ th, td {
 					<tr> 
 						<td>{{first_name ~' ' ~ last_name}}</td>
 						<td>{{"RM" ~salary}}</td>
-						<td>{{"RM%.2f"|format(salary|float)}}</td>
+						<td>{{"RM" ~ (salary*0.09)}}</td>
 					</tr>
 			</table>
 			
