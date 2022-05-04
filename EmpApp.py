@@ -3,6 +3,7 @@ from pymysql import connections
 import os
 import boto3
 from config import *
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -252,7 +253,7 @@ def GetEmpId():
 #add attendance
 @app.route("/empattendance", methods=['POST'])
 def EmpAttandance():
-   
+    #auto-increment att_id
     emp_id = request.form['emp_id']
     now = datetime.now()
     date = now.strftime("%Y-%m-%d")
