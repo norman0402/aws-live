@@ -265,9 +265,9 @@
             		<form action="/getpay/<string:id>" autocomplete="on" method="POST" enctype="multipart/form-data">
 			<h3 style="color: grey; font-size: 25px">Please Enter Employee ID:</h3>
             		<select name="emp_id" id="emp_id" class="form-control mb-4" placeholder="Employee ID" >
-                		<option value="0" readonly>Employee ID</option>
+                		<option id="0" value="0" readonly>Employee ID</option>
                 		{% for e in result %}
-					<option value="{{ e[0] }}">{{[e[1], e[2]]|join(' ')}}</option>
+					<option id="{{ e[0] }}" value="{{ e[0] }}">{{[e[1], e[2]]|join(' ')}}</option>
                     		{% endfor %}
 				
             		</select>
