@@ -185,6 +185,19 @@ def EditEmp():
 
     print("all modification done...")
     return render_template('EditEmpOutput.html', name=emp_name)
+
+#get edit data
+@app.route("/geteditemp/<string:id>", methods=['GET','POST'])
+def GetEditData(id):
+    #emp_id = request.form['emp_id']
+    emp_id = id
+    mycursor = db_conn.cursor()
+    getempdata = "select * from employee WHERE emp_id = %s"
+    mycursor.execute(getempdata,(emp_id))
+    result = mycursor.fetchall()
+    (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
+
+    return render_template('EditEmp.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit)
     
 #delete employee
 @app.route("/delemp/<string:id>", methods=['GET','POST'])
