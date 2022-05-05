@@ -42,11 +42,6 @@ def attendance():
 def addEmployee():
     return render_template('AddEmp.html')
 
-#get employee page
-@app.route("/getempdata", methods=['GET', 'POST'])
-def getEmployee():
-    return render_template('GetEmp.html')
-    
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
