@@ -80,7 +80,6 @@ def AddEmp():
         return "Please select a file"
 
     try:
-
         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
