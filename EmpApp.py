@@ -52,11 +52,6 @@ def payroll():
     #render template and send the set of tuples to the HTML file for displaying
     return render_template('payroll.html',result=result)
 
-#staff details page
-@app.route("/staff", methods=['GET', 'POST'])
-def staff_details():
-    return render_template('DetailsOutput.html')
-
 #about page
 @app.route("/about", methods=['GET'])
 def about():
