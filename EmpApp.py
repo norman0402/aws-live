@@ -184,7 +184,6 @@ def GetEmpData():
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
     employee = mycursor.fetchall()
-    #(emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]
     return render_template('DetailsOutput.html', employee=employee)
 
 #get SINGLE employee
