@@ -21,7 +21,6 @@ db_conn = connections.Connection(
 output = {}
 table = 'employee'
 
-
 #main index
 @app.route('/')
 def home():
