@@ -44,7 +44,7 @@ def addEmployee():
 #payroll page
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
-       #create a cursor
+     #create a cursor
     mycursor = db_conn.cursor()
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
@@ -118,7 +118,7 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-#edit employee, but currently no edit employee page? also not done
+#edit employee
 @app.route("/editemp", methods=['GET','POST'])
 def EditEmp():
     emp_id = request.form['emp_id']
@@ -132,7 +132,6 @@ def EditEmp():
     benefit = request.form['benefit']
     location = request.form['location']
     phone_num = request.form['phone_num']
-    #emp_image_file = request.files['emp_image_file']
 
     update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s, email = %s, phone_num = %s, position = %s, hire_date = %s, salary = %s, benefit = %s WHERE emp_id = %s"
     cursor = db_conn.cursor()
@@ -154,7 +153,6 @@ def EditEmp():
 #get edit data
 @app.route("/geteditemp/<string:id>", methods=['GET','POST'])
 def GetEditData(id):
-    #emp_id = request.form['emp_id']
     emp_id = id
     mycursor = db_conn.cursor()
     getempdata = "select * from employee WHERE emp_id = %s"
@@ -177,8 +175,7 @@ def DeleteEmp(id):
     
 #get employee
 @app.route("/staffDet", methods=['GET','POST'])
-def GetEmpData():
-    
+def GetEmpData(): 
     mycursor = db_conn.cursor()
     getempdata = "select * from employee"
     mycursor.execute(getempdata)
@@ -188,7 +185,6 @@ def GetEmpData():
 #get SINGLE employee
 @app.route("/getemp/<string:id>", methods=['GET','POST'])
 def GetSingleEmpData(id):
-    #emp_id = request.form['emp_id']
     emp_id = id
     mycursor = db_conn.cursor()
     getempdata = "select * from employee WHERE emp_id = %s"
@@ -196,8 +192,6 @@ def GetSingleEmpData(id):
     result = mycursor.fetchall()
     (emp_id, first_name, last_name, pri_skill, location, email, phone_num, position, hire_date, salary, benefit) = result[0]   
     image_url = showimage(bucket, id)
-    # commented as not sure S3 image work or not
-    #return render_template('GetEmpOutput.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit, image_url=image_url)
     return render_template('GetEmpOutput.html', emp_id=emp_id,first_name=first_name,last_name=last_name,pri_skill=pri_skill,location=location,email=email,phone_num=phone_num,position=position,hire_date=hire_date,salary=salary,benefit=benefit,image_url=image_url)
 
 #Get Employee ID
