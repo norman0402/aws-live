@@ -230,7 +230,7 @@ def EmpAttandance():
     finally:
         cursor.close()
 
-    return render_template('AttOutput.html', status=empstatus) #currently no attendanceOutput.html or any similiar page
+    return render_template('AttOutput.html', status=empstatus)
 
 #get payroll
 @app.route("/getpay", methods=['GET','POST'])
